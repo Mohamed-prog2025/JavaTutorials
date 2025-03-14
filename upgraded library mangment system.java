@@ -1,36 +1,62 @@
 import java.util.Scanner;
 
 public class Main {
+
+	public static void libraryDetails() {
+		System.out.println("1.Add a Book");
+		System.out.println("2.search for a Book(by Title or Id)");
+		System.out.println("3.issue a book  (Id)");
+		System.out.println("4.return a Book(id)");
+		System.out.println("5.delete a book(id)");
+		System.out.println("6 Edit Book details(Title/Descripition by id)");
+		System.out.println("7.view all Books");
+		System.out.println("8.Exit");
+		System.out.println("_______________________________________");
+
+	}
+
+
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("enter the number of books u have");
 		int number_of_books = input.nextInt();
+		while (number_of_books <= 0) {
+			System.out.println(" Books Can not Be Zero Or negative ");
+
+			System.out.println("pleasse re Enter Postive integer  number");
+			number_of_books = input.nextInt();
+
+		}
 		System.out.println("Welcome to the library Mangement System!");
 		System.out.println("_______________________________________");
+
 		String[] book_title = new String[number_of_books];
 		String[] book_describition = new String[number_of_books];
 		boolean[] book_issued = new boolean[number_of_books];
 		int book_count = 0;
 		int user_input = 0;
 		while (user_input != 8) {
-			System.out.println("1.Add a Book");
-			System.out.println("2.search for a Book(by Title or Id)");
-			System.out.println("3.issue a book  (Id)");
-			System.out.println("4.return a Book(id)");
-			System.out.println("5.delete a book(id)");
-			System.out.println("6 Edit Book details(Title/Descripition by id)");
-			System.out.println("7.view all Books");
-			System.out.println("8.Exit");
-			System.out.println("_______________________________________");
+			libraryDetails();
+
+			//System.out.println("1.Add a Book");
+//			System.out.println("2.search for a Book(by Title or Id)");
+//			System.out.println("3.issue a book  (Id)");
+//			System.out.println("4.return a Book(id)");
+//			System.out.println("5.delete a book(id)");
+//			System.out.println("6 Edit Book details(Title/Descripition by id)");
+//			System.out.println("7.view all Books");
+//			System.out.println("8.Exit");
+//			System.out.println("_______________________________________");
 			System.out.println("enter your choice");
 			user_input = input.nextInt();
 			input.nextLine();
+
 			if (user_input == 1) {
 				do {
 					System.out.println("enter your book title");
 					book_title[book_count] = input.nextLine();
 				} while (book_title[book_count].isEmpty());
-				
+
 
 				System.out.println("enter your book descripition");
 				book_describition[book_count] = input.nextLine();
@@ -45,7 +71,7 @@ public class Main {
 					int id = input.nextInt();
 					if (id < book_count) {
 						System.out.println("[Found] " + "the book name is " + book_title[id]
-								+ "   \nthe book descripition is " + book_describition[id]);
+										   + "   \nthe book descripition is " + book_describition[id]);
 					} else {
 						System.out.println("[Not-Found]");
 					}
@@ -81,11 +107,14 @@ public class Main {
 				if (book_issued[id] == true) {
 					book_issued[id] = false;
 					System.out.println("the book is returned Thanks");
-				}
-				else {
+				} else {
 					System.out.println("the book is not loaned");
 				}
-			} else if(user_input == 5) {
+			} else if (user_input == 5) {
+
+
+
+
 				System.out.println("enter the book id that u want to delete");
 				int id = input.nextInt();
 				for (int i = id; i < book_count; i++) {
@@ -94,7 +123,7 @@ public class Main {
 					book_issued[i] = book_issued[i + 1];
 				}
 				book_count -= 1;
-				
+
 			} else if (user_input == 6) {
 				System.out.println("enter the book id that u want to edit");
 				int id = input.nextInt();
@@ -111,8 +140,7 @@ public class Main {
 					input.nextLine();
 					book_describition[id] = input.nextLine();
 					System.out.println("The describtion changed!");
-				}
-				else {
+				} else {
 					System.out.println("invalid choice");
 				}
 			} else if (user_input == 7) {
@@ -120,7 +148,7 @@ public class Main {
 					System.out.println(book_title[i]);
 
 			}
-			
+
 		}
 	}
 }
